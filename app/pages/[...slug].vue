@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageHeadline } from '#ui/utils/content'
+// import { findPageHeadline } from '#ui/utils/content'
 
 definePageMeta({
   layout: 'docs'
@@ -8,7 +8,7 @@ definePageMeta({
 
 const route = useRoute()
 const { toc } = useAppConfig()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+// const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 if (!page.value) {
@@ -31,7 +31,7 @@ useSeoMeta({
   ogDescription: description
 })
 
-//const headline = computed(() => findPageHeadline(navigation?.value, page.value))
+// const headline = computed(() => findPageHeadline(navigation?.value, page.value))
 
 // defineOgImageComponent('Docs', {
 //   headline: headline.value

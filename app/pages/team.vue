@@ -32,7 +32,7 @@ const team: TeamMember[] = [
       { icon: 'i-simple-icons-linkedin', url: 'https://www.linkedin.com/in/willcforte/' },
       { icon: 'i-simple-icons-gmail', url: 'mailto:willcforte@gmail.com' },
       { icon: 'i-simple-icons-x', url: 'https://x.com/willcforte' },
-      { icon: 'i-simple-icons-github', url: 'https://github.com/willcforte' },
+      { icon: 'i-simple-icons-github', url: 'https://github.com/willcforte' }
     ]
   },
   {
@@ -44,7 +44,7 @@ const team: TeamMember[] = [
       { icon: 'i-mdi-web', url: 'https://ryanrudes.com/' },
       { icon: 'i-simple-icons-linkedin', url: 'https://www.linkedin.com/in/ryanrudes/' },
       { icon: 'i-simple-icons-gmail', url: 'mailto:ryanrudes@gmail.com' },
-      { icon: 'i-simple-icons-github', url: 'https://www.github.com/ryanrudes' },
+      { icon: 'i-simple-icons-github', url: 'https://www.github.com/ryanrudes' }
     ]
   },
   {

@@ -30,7 +30,7 @@ export default defineAppConfig({
       { label: 'Our Team', to: '/team' },
       { label: 'Blog', to: '/blog' },
       { label: 'Hardware', to: '/hardware' },
-      { label: 'Software', to: '/software' },
+      { label: 'Software', to: '/software' }
     ],
     rightlinks: [
       {
@@ -39,7 +39,7 @@ export default defineAppConfig({
         'target': '_blank',
         'aria-label': 'GitHub'
       }
-    ],
+    ]
   },
   footer: {
     credits: `Copyright © ${new Date().getFullYear()} CCBR`,
