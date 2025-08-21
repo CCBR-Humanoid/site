@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 // import { findPageHeadline } from '#ui/utils/content'
 
 definePageMeta({

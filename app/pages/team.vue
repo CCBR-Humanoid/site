@@ -121,90 +121,62 @@ const team: TeamMember[] = [
 </script>
 
 <template>
-  <div>
-    <UContainer class="py-12">
-      <h1 class="text-4xl font-bold mb-8 text-center">
-        Meet Our Team
-      </h1>
+  <UContainer class="py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Meet Our Team</h1>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        <ULink
-          v-for="member in team"
-          :key="member.name"
-          :to="member.profileUrl"
-          target="_blank"
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <ULink v-for="member in team"
+        :key="member.name" :to="member.profileUrl" target="_blank">
+        <UCard
+          class="text-center p-6 flex flex-col items-center transform transition-all duration-500 ease-in-out
+          hover:scale-105 hover:shadow-xl hover:-translate-y-1"
         >
-          <UCard
-            class="text-center p-6 flex flex-col items-center transform transition-all duration-500 ease-in-out
-            hover:scale-105 hover:shadow-xl hover:-translate-y-1"
-          >
+          <ULink :to="member.profileUrl" target="_blank">
+            <UAvatar :src="member.avatar" :alt="member.name" size="4xl" class="mx-auto mb-4 w-50 h-50" />
+          </ULink>
+
+          <p class="font-semibold">{{ member.name }}</p>
+          <p class="text-sm text-gray-500">{{ member.role }}</p>
+
+          <div class="mt-2 flex justify-center gap-3">
             <ULink
-              :to="member.profileUrl"
+              v-for="(social, i) in member.socials"
+              :key="i"
+              :to="social.url"
               target="_blank"
             >
-              <UAvatar
-                :src="member.avatar"
-                :alt="member.name"
-                size="4xl"
-                class="mx-auto mb-4 w-50 h-50"
-              />
+              <UIcon :name="social.icon" class="text-primary w-5 h-5" />
             </ULink>
+          </div>
+        </UCard>
+      </ULink>
+    </div>
+  </UContainer>
 
-            <p class="font-semibold">{{ member.name }}</p>
-            <p class="text-sm text-gray-500">{{ member.role }}</p>
+  <UContainer class="py-12">
+    <h2 class="text-4xl font-bold mb-8 text-center">Team Affiliates</h2>
 
-            <div class="mt-2 flex justify-center gap-3">
-              <ULink
-                v-for="(social, i) in member.socials"
-                :key="i"
-                :to="social.url"
-                target="_blank"
-              >
-                <UIcon
-                  :name="social.icon"
-                  class="text-primary w-5 h-5"
-                />
-              </ULink>
-            </div>
-          </UCard>
-        </ULink>
-      </div>
-    </UContainer>
-
-    <UContainer class="py-12">
-      <h2 class="text-4xl font-bold mb-8 text-center">
-        Team Affiliates
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
-        <ULink
-          v-for="partner in partners"
-          :key="partner.name"
-          :to="partner.url"
-          target="_blank"
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+      <ULink v-for="partner in partners"
+        :key="partner.name" :to="partner.url" target="_blank">
+        <UCard
+          class="text-center p-6 flex flex-col items-center transform transition-all duration-500 ease-in-out
+          hover:scale-105 hover:shadow-xl hover:-translate-y-1"
         >
-          <UCard
-            class="text-center p-6 flex flex-col items-center transform transition-all duration-500 ease-in-out
-            hover:scale-105 hover:shadow-xl hover:-translate-y-1"
-          >
-            <img
-              :src="partner.logo"
-              :alt="partner.name + ' logo'"
-              class="mb-4 h-30 w-auto object-contain mx-auto"
-            >
+          <img
+            :src="partner.logo"
+            :alt="partner.name + ' logo'"
+            class="mb-4 h-30 w-auto object-contain mx-auto"
+          />
 
-            <p class="font-semibold">{{ partner.name }}</p>
-            <p class="text-sm text-gray-500">
-              <template
-                v-for="(club, i) in partner.clubs"
-                :key="club"
-              >
-                {{ club }}<span v-if="i < partner.clubs.length - 1"> &amp; </span>
-              </template>
-            </p>
-          </UCard>
-        </ULink>
-      </div>
-    </UContainer>
-  </div>
+          <p class="font-semibold">{{ partner.name }}</p>
+          <p class="text-sm text-gray-500">
+            <template v-for="(club, i) in partner.clubs" :key="club">
+              {{ club }}<span v-if="i < partner.clubs.length - 1"> &amp; </span>
+            </template>
+          </p>
+        </UCard>
+      </ULink>
+    </div>
+  </UContainer>
 </template>
