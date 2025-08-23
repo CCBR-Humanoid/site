@@ -51,8 +51,6 @@ const { header } = useAppConfig()
         class="lg:hidden"
       />
 
-      <UColorModeButton v-if="header?.colorMode" />
-
       <template v-if="header?.links">
         <UButton
           v-for="(link, index) of header.links"
@@ -60,6 +58,8 @@ const { header } = useAppConfig()
           v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
         />
       </template>
+
+      <UColorModeButton v-if="header?.colorMode" />
     </template>
 
     <template #body>
