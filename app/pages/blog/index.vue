@@ -101,7 +101,10 @@ const sortOptions = [
           <section class="mb-6 grid gap-3 sm:flex sm:items-center sm:justify-between">
             <div class="flex flex-wrap items-center gap-2">
               <!-- Category filter -->
-              <UPopover>
+              <UDropdownMenu :items="[[
+                { label: 'All categories', onSelect: () => selectedCategory = null },
+                ...allCategories.map(c => ({ label: c, onSelect: () => selectedCategory = c }))
+              ]]">
                 <UButton
                   color="neutral"
                   variant="soft"
@@ -109,16 +112,13 @@ const sortOptions = [
                   :label="selectedCategory ? `Category: ${selectedCategory}` : 'All categories'"
                   class="rounded-full"
                 />
-                <template #panel>
-                  <UCommand :groups="[{
-                    key: 'categories',
-                    items: [{ id: 'all', label: 'All categories' }, ...allCategories.map(c => ({ id: c, label: c }))]
-                  }]" @update:value="(val: string) => { selectedCategory = val === 'all' ? null : val }" />
-                </template>
-              </UPopover>
+              </UDropdownMenu>
 
               <!-- Tags filter -->
-              <UPopover>
+              <UDropdownMenu :items="[allTags.map(tag => ({
+                label: tag,
+                onSelect: () => selectedTags = selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]
+              }))]">
                 <UButton
                   color="neutral"
                   variant="soft"
@@ -126,20 +126,7 @@ const sortOptions = [
                   :label="selectedTags.length ? `${selectedTags.length} ${pluralize(selectedTags.length, 'tag')}` : 'Tags'"
                   class="rounded-full"
                 />
-                <template #panel>
-                  <div class="p-2 w-64">
-                    <div class="flex flex-wrap gap-2">
-                      <UChip
-                        v-for="tag in allTags"
-                        :key="tag"
-                        :label="tag"
-                        :selected="selectedTags.includes(tag)"
-                        @click="selectedTags = selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]"
-                      />
-                    </div>
-                  </div>
-                </template>
-              </UPopover>
+              </UDropdownMenu>
             </div>
 
             <div class="flex items-center gap-2">
@@ -157,21 +144,53 @@ const sortOptions = [
 
           <!-- Active tag chips -->
           <div v-if="selectedCategory || selectedTags.length" class="mb-4 flex flex-wrap items-center gap-2">
-            <UBadge v-if="selectedCategory" color="primary" variant="soft" class="rounded-full">{{ selectedCategory }}</UBadge>
-            <UBadge v-for="tag in selectedTags" :key="tag" color="neutral" variant="soft" class="rounded-full">{{ tag }}</UBadge>
+            <UBadge
+              v-if="selectedCategory"
+              color="primary"
+              variant="soft"
+              class="rounded-full"
+            >
+              {{ selectedCategory }}
+            </UBadge>
+
+            <UBadge
+              v-for="tag in selectedTags"
+              :key="tag"
+              color="neutral"
+              variant="soft"
+              class="rounded-full cursor-pointer select-none transition group hover:ring-2 hover:ring-[--ui-border] hover:bg-primary/10 hover:text-primary"
+              :aria-label="`Remove tag ${tag}`"
+              @click="selectedTags = selectedTags.filter(t => t !== tag)"
+            >
+              <span class="inline-flex items-center gap-1">
+                {{ tag }}
+                <UIcon name="i-lucide-x" class="h-3.5 w-3.5 opacity-60 group-hover:opacity-100" />
+              </span>
+            </UBadge>
+
             <UButton color="neutral" variant="ghost" size="xs" @click="selectedCategory = null; selectedTags = []">Clear</UButton>
           </div>
 
           <!-- Posts -->
-          <UBlogPosts class="mt-2">
+      <UBlogPosts class="mt-2">
             <UBlogPost
               v-for="(post, index) in items"
               :key="index"
               v-bind="post"
               :to="post.path"
             >
+              <template #header>
+                <img
+                  v-if="post.image"
+                  :src="post.image"
+                  :alt="post.title"
+                  class="w-full aspect-[16/9] object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </template>
               <template #footer>
-                <div class="flex flex-wrap items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2 px-4 pb-4">
                   <UBadge v-if="post.category" color="primary" variant="soft" class="rounded-full">{{ post.category }}</UBadge>
                   <UBadge v-for="tag in post.tags" :key="tag" color="neutral" variant="soft" class="rounded-full">{{ tag }}</UBadge>
                 </div>
