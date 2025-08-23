@@ -19,19 +19,19 @@ const createUiPro = () => ({
 })
 
 const createSeo = () => ({
-  siteName: 'Nuxt Docs Template'
+  siteName: 'CCBR'
 })
 
 const createHeader = () => ({
-  title: '',
+  title: 'Title or Logo Here',
   to: '/',
   logo: {
     alt: '',
     light: '',
     dark: ''
   },
-  search: true, // to remove default search bar
-  colorMode: true,
+  search: true, // toggle visibility of search bar
+  colorMode: true, // toggle visibility of light/dark mode button
   links: [
     { label: 'Our Team', to: '/team' },
     { label: 'Blog', to: '/blog' },
