@@ -38,7 +38,7 @@ useSeoMeta({
 // })
 
 defineOgImageComponent('Docs', {
-  headline: page.headline
+  headline: page.value?.title
 })
 
 const links = computed(() => {
@@ -62,7 +62,6 @@ const links = computed(() => {
       :title="page.title"
       :description="page.description"
       :links="page.links"
-      :headline="page.headline"
     />
 
     <UPageBody>
