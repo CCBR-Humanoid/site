@@ -1,0 +1,13 @@
+# List of team affiliates / partners
+partners:
+  - name: Caltech
+    logo: /logo.svg
+    clubs:
+      - Caltech Robotics Team
+      - Robotic Manipulation Club
+    url: http://crt.caltech.edu/
+  - name: Rutgers
+    logo: /logo.svg
+    clubs:
+      - Rutgers Dynamics
+    url: https://rutgers.edu

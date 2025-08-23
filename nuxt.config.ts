@@ -59,20 +59,6 @@ export default defineNuxtConfig({
       description: 'This is the full documentation for the Nuxt Docs Template.'
     },
     sections: [
-      {
-        title: 'Getting Started',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
-        ]
-      },
-      {
-        title: 'Essentials',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
-        ]
-      }
     ]
   }
 })

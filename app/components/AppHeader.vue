@@ -12,14 +12,11 @@ const { header } = useAppConfig()
     :to="header?.to || '/'"
   >
     <UContentSearchButton
-      v-if="header?.search"
       :collapsed="false"
-      class="w-full"
+      :block="true"
     />
-
-    <template
-      #title
-    >
+    
+    <template #title>
       <UColorModeImage
         v-if="header?.logo?.dark || header?.logo?.light"
         :light="header?.logo?.light!"
@@ -34,27 +31,67 @@ const { header } = useAppConfig()
     </template>
 
     <template #right>
-      <UContentSearchButton
-        v-if="header?.search"
-        class="lg:hidden"
-      />
+      <UDropdownMenu
+        :items="header.links"
+        :modal="false"
+        size="xs"
+      >
+        <UButton
+          label="Home"
+          variant="subtle"
+          trailing-icon="i-lucide-chevron-down"
+          size="xs"
+          class="rounded-full"
+        />
+      </UDropdownMenu>
 
-      <template v-if="header?.links">
+      <!-- Desktop/tablet links -->
+      <!--
+      <div v-if="header?.links" class="hidden md:flex flex-wrap items-center gap-1">
         <UButton
           v-for="(link, index) of header.links"
           :key="index"
           v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
         />
-      </template>
+      </div>
+      -->
 
-      <UColorModeButton v-if="header?.colorMode" />
+      <!-- Mobile menu for links -->
+      <!--
+      <UDropdownMenu
+        v-if="header?.links"
+        class="md:hidden"
+        :items="header.links"
+        :modal="false"
+        size="xs"
+      >
+        <UButton
+          label="Menu"
+          variant="subtle"
+          trailing-icon="i-lucide-chevron-down"
+          size="xs"
+          class="rounded-full"
+        />
+      </UDropdownMenu>
+      -->
+      
+      <UColorModeButton />
     </template>
 
     <template #body>
-      <UContentNavigation
-        highlight
-        :navigation="navigation"
-      />
+      <div class="overflow-x-auto">
+        <UContentNavigation
+          highlight
+          :navigation="navigation"
+        />
+      </div>
     </template>
   </UHeader>
 </template>
+
+<style scoped>
+/* Additionally hide title/logo on short viewports to save vertical space */
+@media (max-height: 700px) {
+  .title-or-logo { display: none; }
+}
+</style>

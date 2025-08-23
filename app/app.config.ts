@@ -23,15 +23,15 @@ const createSeo = () => ({
 })
 
 const createHeader = () => ({
-  title: 'Title or Logo Here',
+  title: 'CCBR',
   to: '/',
   logo: {
     alt: '',
     light: '',
     dark: ''
   },
-  search: true, // toggle visibility of search bar
-  colorMode: true, // toggle visibility of light/dark mode button
+  //search: true, // toggle visibility of search bar
+  //colorMode: true, // toggle visibility of light/dark mode button
   links: [
     { label: 'Our Team', to: '/team' },
     { label: 'Blog', to: '/blog' },
@@ -50,17 +50,13 @@ const createHeader = () => ({
 
 const createFooter = () => ({
   credits: `Copyright © ${new Date().getFullYear()} ${C.TEAM_NAME}`,
-  colorMode: false,
   links: [
-    // Uncomment for Discord button in footer
-    /*
     {
-      icon: 'i-simple-icons-discord',
-      to: 'https://discord.com/invite/ps2h6QT',
+      icon: 'i-simple-icons-linkedin',
+      to: C.LINKEDIN_URL,
       target: '_blank',
-      'aria-label': 'Nuxt UI on Discord'
+      'aria-label': `${C.TEAM_NAME} on LinkedIn`
     },
-    */
     {
       icon: 'i-simple-icons-github',
       to: C.GITHUB_ORG_URL,

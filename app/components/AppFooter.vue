@@ -1,3 +1,4 @@
+<!-- Defines the page footer component which appears on all pages -->
 <script setup lang="ts">
 const { footer } = useAppConfig()
 </script>
@@ -5,12 +6,10 @@ const { footer } = useAppConfig()
 <template>
   <UFooter>
     <template #left>
-      {{ footer.credits }}
+      <FooterCredits />
     </template>
 
     <template #right>
-      <UColorModeButton v-if="footer?.colorMode" />
-
       <template v-if="footer?.links">
         <UButton
           v-for="(link, index) of footer?.links"
