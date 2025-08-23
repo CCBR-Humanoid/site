@@ -5,11 +5,12 @@
 title: Welcome to the CCBR Blog
 description: Introducing our blog where we share updates, builds, and insights.
 date: 2025-08-23
-# Optional
-# tags:
-#   - announcement
-# author: Team CCBR
-# draft: false
+category: Announcement
+tags:
+  - intro
+  - overview
+author: Team CCBR
+draft: false
 ---
 
 ## Hello 👋

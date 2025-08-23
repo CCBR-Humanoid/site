@@ -13,7 +13,7 @@ type Post = {
 const { data: posts } = await useAsyncData<Post[]>('blog-list', () =>
   queryCollection('blog')
     .where('draft', '=', false)
-    .select('title', 'description', 'path', 'date')
+  .select('title', 'description', 'path', 'date', 'category', 'cover', 'tags')
     .all()
 )
 
