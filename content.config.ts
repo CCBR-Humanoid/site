@@ -45,8 +45,8 @@ function createDocsCollection() {
   return defineCollection({
     type: 'page',
     source: {
-      include: '**',
-      exclude: ['index.md', 'team.md']
+  include: '**',
+  exclude: ['index.md', 'team.md', 'blog/**', 'team/**']
     },
     schema: z.object({
       links: z.array(z.object({
@@ -59,12 +59,34 @@ function createDocsCollection() {
   })
 }
 
+function createBlogCollection() {
+  return defineCollection({
+    type: 'page',
+    // All markdown files under content/blog/** will be treated as blog posts
+    source: 'blog/**',
+    schema: z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      date: z.string().describe('Published date (YYYY-MM-DD)').optional(),
+      cover: z.string().describe('Cover image path or URL').optional(),
+      tags: z.array(z.string()).default([]).optional(),
+      author: z.string().optional(),
+      draft: z.boolean().default(false).optional(),
+      seo: z.object({
+        title: z.string().optional(),
+        description: z.string().optional()
+      }).optional()
+    })
+  })
+}
+
 // Assemble the content configuration
 export default defineContentConfig({
   collections: {
     landing: createLandingCollection(),
     team: createTeamCollection(),
     partners: createPartnersCollection(),
-    docs: createDocsCollection()
+  docs: createDocsCollection(),
+  blog: createBlogCollection()
   }
 })
