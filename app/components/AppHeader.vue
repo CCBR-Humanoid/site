@@ -4,6 +4,28 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const { header } = useAppConfig()
+
+const route = useRoute()
+
+function capitalizeWords(str: string) {
+  return str.replace(/(^|\s|[-_/])([a-z])/g, (_, sep, ch) => sep + ch.toUpperCase()).replace(/[-_]/g, ' ')
+}
+
+const currentMenuLabel = computed(() => {
+  const path = route.path || '/'
+  const links = (header?.links || []) as Array<{ label?: string; to?: string }>
+  // Longest prefix match against configured links
+  const match = links
+    .filter(l => typeof l.to === 'string' && l.to)
+    .slice()
+    .sort((a, b) => String(b.to).length - String(a.to).length)
+    .find(l => path === l.to || path.startsWith(String(l.to) + '/'))
+
+  if (match?.label) return match.label
+  if (path === '/') return 'Home'
+  const seg = path.split('/').filter(Boolean)[0]
+  return seg ? capitalizeWords(seg) : 'Menu'
+})
 </script>
 
 <template>
@@ -37,7 +59,7 @@ const { header } = useAppConfig()
         size="xs"
       >
         <UButton
-          label="Home"
+          :label="currentMenuLabel"
           variant="subtle"
           trailing-icon="i-lucide-chevron-down"
           size="xs"
