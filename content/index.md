@@ -9,13 +9,15 @@ seo:
 ---
 orientation: horizontal
 ---
-  ![Hero image](images\ccbr_humanoid_hero.png){.max-w-xl .rounded-lg .shadow-lg}
+
+::HeroCarousel
+::
 
 #title
 CCBR Humanoid Collaboratory
 
 #description
-The first student-run legged robotics collaboration, created to make robotics accessible for all.
+The first student-run, fully open-souce legged robotics collaboration.
 <br></br>
 Founded at ICRA 2025 by <a href="/team">students</a> at Caltech, Columbia, Berkeley, and Rutgers.
 
@@ -29,17 +31,7 @@ Founded at ICRA 2025 by <a href="/team">students</a> at Caltech, Columbia, Berke
   Get started
   :::
 
-  :::u-button
-  ---
-  color: neutral
-  icon: i-simple-icons-github
-  size: xl
-  target: _blank
-  to: /
-  variant: subtle
-  ---
-  Repositories
-  :::
+  ::github-button
 ::
 
 ::u-page-section
