@@ -69,6 +69,7 @@ function createBlogCollection() {
       description: z.string().optional(),
       date: z.string().describe('Published date (YYYY-MM-DD)').optional(),
       cover: z.string().describe('Cover image path or URL').optional(),
+  category: z.string().describe('Post category').optional(),
       tags: z.array(z.string()).default([]).optional(),
       author: z.string().optional(),
       draft: z.boolean().default(false).optional(),
