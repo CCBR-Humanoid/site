@@ -25,7 +25,7 @@ Founded at ICRA 2025 by <a href="/team">students</a> at Caltech, Columbia, Berke
   :::u-button
   ---
   size: xl
-  to: /getting-started
+  to: /
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
