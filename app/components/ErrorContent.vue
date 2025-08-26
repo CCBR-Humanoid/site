@@ -10,8 +10,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'goBack'): void
-  (e: 'reload'): void
+  (e: 'goBack' | 'reload'): void
 }>()
 </script>
 
@@ -27,7 +26,7 @@ const emit = defineEmits<{
           :subcopy="props.subcopy"
           :is-404="props.is404"
           :issue-url="props.issueUrl"
-          @goBack="emit('goBack')"
+          @go-back="emit('goBack')"
           @reload="emit('reload')"
         />
       </section>

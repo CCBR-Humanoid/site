@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 import { useSearchData } from '../composables/useSearchData'
+import * as C from './constants'
 
 const { error } = defineProps<{
   error: NuxtError
@@ -38,19 +39,19 @@ useHead({
   ]
 })
 
-function goBack () {
+function goBack() {
   if (history.length > 1) router.back()
   else router.push('/')
 }
 
-function reload () {
+function reload() {
   if (typeof window !== 'undefined') window.location.reload()
 }
 
 const issueUrl = computed(() => {
   const title = encodeURIComponent(`Error ${statusCode.value} on ${route.fullPath}`)
   const body = encodeURIComponent(`I encountered an error on ${route.fullPath}\n\nStatus: ${statusCode.value}\nMessage: ${error?.message || ''}`)
-  return `https://github.com/willcforte/ccbr-docs/issues/new?title=${title}&body=${body}`
+  return `${C.GITHUB_REPO_URL}/issues/new?title=${title}&body=${body}`
 })
 </script>
 
@@ -58,7 +59,7 @@ const issueUrl = computed(() => {
   <UApp>
     <div class="min-h-screen flex flex-col">
       <AppHeader />
-      
+
       <ErrorContent
         :status-code="statusCode"
         :headline="headline"
@@ -67,7 +68,7 @@ const issueUrl = computed(() => {
         :issue-url="issueUrl"
         :status-message="error?.statusMessage"
         :message="error?.message"
-        @goBack="goBack"
+        @go-back="goBack"
         @reload="reload"
       />
       <AppFooter />
