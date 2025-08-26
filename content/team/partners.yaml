@@ -8,14 +8,14 @@ partners:
     subtitle: Columbia University Robotics Club (CURC)
     logo: /logos/curc.svg
     url: https://www.columbiarobotics.club/
-  - title: Caltech
-    subtitle: Robotic Manipulation Club (RMC)
-    logo: /logo.svg
-    url: https://rmc.caltech.edu/
   - title: Rutgers
     subtitle: Rutgers Dynamics
     logo: /logos/rud.png
     url: https://www.linkedin.com/company/rutgers-dynamics/
+  - title: Caltech
+    subtitle: Robotic Manipulation Club (RMC)
+    logo: /logo.svg
+    url: https://rmc.caltech.edu/
   - title: UC Berkeley
     logo: /logo.svg
     url: https://www.berkeley.edu/

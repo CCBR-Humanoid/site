@@ -33,7 +33,7 @@ const partners = await useContentCollectionArray<Partner>({
     <GridSection
       title="Team Affiliates"
       :items="partners"
-      item-key="title"
+      item-key="url"
       min-width="220px"
       :heading-level="2"
     >

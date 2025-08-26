@@ -1,4 +1,4 @@
 export interface SocialLink {
-  icon: string;
-  url: string;
+  icon: string
+  url: string
 }
