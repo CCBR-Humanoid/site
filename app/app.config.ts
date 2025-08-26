@@ -26,12 +26,12 @@ const createHeader = () => ({
   title: 'CCBR',
   to: '/',
   logo: {
-    alt: 'CCBR Logo',
-    light: '/logos/ccbrlogo.webp',
-    dark: '/logos/ccbrlogo.webp'
+    alt: '',
+    light: '',
+    dark: ''
   },
-  //search: true, // toggle visibility of search bar
-  //colorMode: true, // toggle visibility of light/dark mode button
+  // search: true, // toggle visibility of search bar
+  // colorMode: true, // toggle visibility of light/dark mode button
   links: [
     { label: 'Home', to: '/' },
     { label: 'Our Team', to: '/team' },
@@ -40,9 +40,9 @@ const createHeader = () => ({
   ],
   rightlinks: [
     {
-      icon: 'i-simple-icons-github',
-      to: C.GITHUB_ORG_URL,
-      target: '_blank',
+      'icon': 'i-simple-icons-github',
+      'to': C.GITHUB_ORG_URL,
+      'target': '_blank',
       'aria-label': 'GitHub'
     }
   ]
@@ -52,15 +52,15 @@ const createFooter = () => ({
   credits: `Copyright © ${new Date().getFullYear()} ${C.TEAM_NAME}`,
   links: [
     {
-      icon: 'i-simple-icons-linkedin',
-      to: C.LINKEDIN_URL,
-      target: '_blank',
+      'icon': 'i-simple-icons-linkedin',
+      'to': C.LINKEDIN_URL,
+      'target': '_blank',
       'aria-label': `${C.TEAM_NAME} on LinkedIn`
     },
     {
-      icon: 'i-simple-icons-github',
-      to: C.GITHUB_ORG_URL,
-      target: '_blank',
+      'icon': 'i-simple-icons-github',
+      'to': C.GITHUB_ORG_URL,
+      'target': '_blank',
       'aria-label': `${C.TEAM_NAME} on GitHub`
     }
   ]
@@ -68,15 +68,16 @@ const createFooter = () => ({
 
 // Expose for reuse in components via useAppConfig()
 const createSocial = () => ({
-  githubOrgUrl: C.GITHUB_ORG_URL
+  githubOrgUrl: C.GITHUB_ORG_URL,
+  githubRepoUrl: C.GITHUB_REPO_URL
 })
 
 const createToc = () => ({
   title: 'On this page',
   bottom: {
     title: 'Community',
-    // Set once your repo path is final; component will append the current doc path
-    edit: 'https://github.com/willcforte/ccbr-docs/edit/main/content',
+    // Component will append the current doc path
+    edit: `${C.GITHUB_REPO_URL}/edit/main/content`,
     links: [{
       icon: 'i-lucide-star',
       label: 'Star our GitHub',

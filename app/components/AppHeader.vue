@@ -13,7 +13,7 @@ function capitalizeWords(str: string) {
 
 const currentMenuLabel = computed(() => {
   const path = route.path || '/'
-  const links = (header?.links || []) as Array<{ label?: string; to?: string }>
+  const links = (header?.links || []) as Array<{ label?: string, to?: string }>
   // Longest prefix match against configured links
   const match = links
     .filter(l => typeof l.to === 'string' && l.to)
@@ -37,7 +37,7 @@ const currentMenuLabel = computed(() => {
       :collapsed="false"
       :block="true"
     />
-    
+
     <template #title>
       <UColorModeImage
         v-if="header?.logo?.dark || header?.logo?.light"
@@ -96,7 +96,7 @@ const currentMenuLabel = computed(() => {
         />
       </UDropdownMenu>
       -->
-      
+
       <UColorModeButton />
     </template>
 

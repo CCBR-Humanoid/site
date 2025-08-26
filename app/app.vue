@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSearchData } from '../composables/useSearchData'
+
 const { seo } = useAppConfig()
 
 // Sidebar/header navigation remains docs-only
@@ -46,8 +47,8 @@ provide('navigation', navigation)
     <ClientOnly>
       <LazyUContentSearch
         :files="files"
-  :navigation="searchNavigation"
-  :groups="groups"
+        :navigation="searchNavigation"
+        :groups="groups"
       />
     </ClientOnly>
   </UApp>
