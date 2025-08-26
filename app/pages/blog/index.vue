@@ -67,6 +67,11 @@ useSeoMeta({
   description: 'Latest news and updates.'
 })
 
+defineOgImageComponent('Docs', {
+  title: 'CCBR Blog',
+  description: 'Latest news and updates from the CCBR Humanoid Collaboratory.'
+})
+
 const sortOptions = [
   { label: 'Newest', value: 'newest' },
   { label: 'Oldest', value: 'oldest' },

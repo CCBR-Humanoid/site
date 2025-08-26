@@ -1,6 +1,6 @@
 ---
 title: Hardware
-description: shadcn-docs-nuxt is a Nuxt documentation template built with Nuxt Content and shadcn-vue.
+description: Hardware docs for the CCBR Humanoid Collaboratory: CAD, actuators, electronics, and assembly notes.
 icon: lucide:hammer
 ---
 

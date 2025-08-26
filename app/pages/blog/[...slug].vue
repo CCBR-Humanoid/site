@@ -21,6 +21,11 @@ useSeoMeta({
   ogDescription: description
 })
 
+defineOgImageComponent('Docs', {
+  title,
+  description
+})
+
 // Back button reveal/hide state
 const isHidden = ref(false)
 const isFocused = ref(false)

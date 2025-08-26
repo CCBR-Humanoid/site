@@ -46,7 +46,7 @@ function createDocsCollection() {
     type: 'page',
     source: {
   include: '**',
-  exclude: ['index.md', 'team.md', 'blog/**', 'team/**']
+  exclude: ['index.md', 'team.md', 'blog/**', 'team/**', 'hardware.md', 'software.md']
     },
     schema: z.object({
       links: z.array(z.object({

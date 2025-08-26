@@ -31,8 +31,7 @@ const emit = defineEmits<{
       <UButton color="primary" size="lg" icon="i-lucide-home" to="/">Go home</UButton>
       <UButton color="neutral" variant="soft" size="lg" icon="i-lucide-arrow-left" @click="emit('goBack')">Go back</UButton>
       <UButton v-if="!props.is404" color="primary" variant="outline" size="lg" icon="i-lucide-refresh-cw" @click="emit('reload')">Reload</UButton>
-      <UContentSearchButton size="lg" icon="i-lucide-search" label="Search the docs" />
-  <UButton color="neutral" variant="ghost" size="lg" icon="i-lucide-bug" :to="props.issueUrl" target="_blank">Report issue</UButton>
+      <UButton color="neutral" variant="ghost" size="lg" icon="i-lucide-bug" :to="props.issueUrl" target="_blank">Report issue</UButton>
     </div>
   </div>
 </template>

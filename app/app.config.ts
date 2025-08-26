@@ -36,8 +36,7 @@ const createHeader = () => ({
     { label: 'Home', to: '/' },
     { label: 'Our Team', to: '/team' },
     { label: 'Blog', to: '/blog' },
-    { label: 'Hardware', to: '/hardware' },
-    { label: 'Software', to: '/software' }
+    { label: 'Docs', to: '/docs' }
   ],
   rightlinks: [
     {
@@ -73,24 +72,20 @@ const createSocial = () => ({
 })
 
 const createToc = () => ({
-  title: 'Table of Contents',
+  title: 'On this page',
   bottom: {
     title: 'Community',
-    edit: 'https://github.com/nuxt-ui-pro/docs/edit/main/content',
+    // Set once your repo path is final; component will append the current doc path
+    edit: 'https://github.com/willcforte/ccbr-docs/edit/main/content',
     links: [{
       icon: 'i-lucide-star',
-      label: 'Star on GitHub',
-      to: 'https://github.com/nuxt/ui',
+      label: 'Star our GitHub',
+      to: C.GITHUB_ORG_URL,
       target: '_blank'
     }, {
-      icon: 'i-lucide-book-open',
-      label: 'Nuxt UI Pro docs',
-      to: 'https://ui.nuxt.com/getting-started/installation/pro/nuxt',
-      target: '_blank'
-    }, {
-      icon: 'i-simple-icons-nuxtdotjs',
-      label: 'Purchase a license',
-      to: 'https://ui.nuxt.com/pro/purchase',
+      icon: 'i-simple-icons-linkedin',
+      label: `${C.TEAM_NAME} on LinkedIn`,
+      to: C.LINKEDIN_URL,
       target: '_blank'
     }]
   }

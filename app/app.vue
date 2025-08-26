@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { useSearchData } from '../composables/useSearchData'
 const { seo } = useAppConfig()
 
+// Sidebar/header navigation remains docs-only
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-  server: false
-})
+
+// Centralized search data (files, navigation, groups)
+const { files, searchNavigation, groups } = useSearchData()
 
 useHead({
   meta: [
@@ -44,7 +46,8 @@ provide('navigation', navigation)
     <ClientOnly>
       <LazyUContentSearch
         :files="files"
-        :navigation="navigation"
+  :navigation="searchNavigation"
+  :groups="groups"
       />
     </ClientOnly>
   </UApp>

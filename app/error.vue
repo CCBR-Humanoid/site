@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
+import { useSearchData } from '../composables/useSearchData'
 
 const { error } = defineProps<{
   error: NuxtError
@@ -10,9 +11,7 @@ useHead({ htmlAttrs: { lang: 'en' } })
 // Note: SEO is set below based on the actual error (404 vs others)
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-  server: false
-})
+const { files, searchNavigation, groups } = useSearchData()
 
 provide('navigation', navigation)
 
@@ -77,7 +76,8 @@ const issueUrl = computed(() => {
     <ClientOnly>
       <LazyUContentSearch
         :files="files"
-        :navigation="navigation"
+        :navigation="searchNavigation"
+        :groups="groups"
       />
     </ClientOnly>
   </UApp>

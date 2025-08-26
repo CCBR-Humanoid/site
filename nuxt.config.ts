@@ -15,6 +15,13 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Default color scheme follows the user's system preference
+  colorMode: {
+    preference: 'system',
+    fallback: 'dark',
+    classSuffix: ''
+  },
+
   content: {
     build: {
       markdown: {
@@ -34,6 +41,10 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
+    },
+    routeRules: {
+      '/hardware': { redirect: '/docs' },
+      '/software': { redirect: '/docs' }
     }
   },
 
@@ -51,12 +62,12 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI Pro and Nuxt Content.',
+    domain: 'https://ccbr.ai/',
+    title: 'CCBR Docs',
+    description: 'Open-source robotics docs from the CCBR Humanoid Collaboratory.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'CCBR Docs - Full Documentation',
+      description: 'The full documentation for the CCBR Humanoid Collaboratory projects.'
     },
     sections: [
     ]

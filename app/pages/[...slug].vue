@@ -38,8 +38,11 @@ useSeoMeta({
 // })
 
 defineOgImageComponent('Docs', {
-  headline: page.value?.title
+  title,
+  description
 })
+
+const showToc = computed(() => route.path === '/docs' || route.path.startsWith('/docs/'))
 
 const links = computed(() => {
   const links = []
@@ -76,7 +79,7 @@ const links = computed(() => {
     </UPageBody>
 
     <template
-      v-if="page?.body?.toc?.links?.length"
+      v-if="showToc && page?.body?.toc?.links?.length"
       #right
     >
       <UContentToc

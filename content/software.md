@@ -1,6 +1,6 @@
 ---
 title: Software
-description: shadcn-docs-nuxt is a Nuxt documentation template built with Nuxt Content and shadcn-vue.
+description: Software docs for the CCBR Humanoid Collaboratory: simulation, control, firmware, and tooling.
 icon: lucide:code
 ---
 
