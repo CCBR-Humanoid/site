@@ -1,4 +1,5 @@
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
+import type { Ref } from 'vue'
 
 // Declare Nuxt auto-imported functions for TypeScript without depending on '#imports'
 declare function useAsyncData<T>(
@@ -6,7 +7,7 @@ declare function useAsyncData<T>(
   handler: () => Promise<T>
 ): Promise<{ data: Ref<T> }>
 declare function queryCollection(collection: string): {
-  first: () => Promise<any>
+  first: () => Promise<Record<string, unknown> | null>
 }
 
 /**
@@ -21,7 +22,7 @@ export async function useContentCollectionArray<T>(options: {
   const key = options.key ?? `${options.collection}-${options.field}`
   const { data } = await useAsyncData<T[]>(key, async () => {
     const item = await queryCollection(options.collection).first()
-    const arr = (item as any)?.[options.field]
+    const arr = item ? (item[options.field] as unknown) : undefined
     return Array.isArray(arr) ? (arr as T[]) : []
   })
   // Return a de-duplicated, stable array to avoid SSR/CSR merge duplication.
@@ -30,28 +31,30 @@ export async function useContentCollectionArray<T>(options: {
   const unique = computed<T[]>(() => {
     const list = (data as Ref<T[] | undefined>).value ?? []
 
-    function stableKey(v: any): string {
+    function stableKey(v: unknown): string {
       if (v == null) return 'null'
       const t = typeof v
       if (t === 'string' || t === 'number' || t === 'boolean') return String(v)
       // Prefer truly unique identifiers when present
-      if (v.id) return `id:${v.id}`
-      if (v.slug) return `slug:${v.slug}`
-      if (v.path) return `path:${v.path}`
+      const asAny = v as Record<string, unknown>
+      if (asAny.id) return `id:${String(asAny.id)}`
+      if (asAny.slug) return `slug:${String(asAny.slug)}`
+      if (asAny.path) return `path:${String(asAny.path)}`
 
       // Deterministic stringify with sorted keys
-      const seen = new WeakSet()
-      const stringify = (val: any): string => {
+      const seen = new WeakSet<object>()
+      const stringify = (val: unknown): string => {
         if (val === null) return 'null'
         const type = typeof val
-        if (type === 'string') return JSON.stringify(val)
+        if (type === 'string') return JSON.stringify(val as string)
         if (type === 'number' || type === 'boolean') return String(val)
-        if (Array.isArray(val)) return `[${val.map(stringify).join(',')}]`
+        if (Array.isArray(val)) return `[${(val as unknown[]).map(stringify).join(',')}]`
         if (type === 'object') {
-          if (seen.has(val)) return '"[Circular]"'
-          seen.add(val)
-          const keys = Object.keys(val).sort()
-          const entries = keys.map(k => `${JSON.stringify(k)}:${stringify(val[k])}`)
+          const obj = val as Record<string, unknown>
+          if (seen.has(obj)) return '"[Circular]"'
+          seen.add(obj)
+          const keys = Object.keys(obj).sort()
+          const entries = keys.map(k => `${JSON.stringify(k)}:${stringify(obj[k])}`)
           return `{${entries.join(',')}}`
         }
         return JSON.stringify(String(val))
@@ -61,7 +64,7 @@ export async function useContentCollectionArray<T>(options: {
     }
 
     const map = new Map<string, T>()
-    for (const it of list as any[]) {
+    for (const it of list as unknown[]) {
       const k = stableKey(it)
       if (!map.has(k)) map.set(k, it as T)
     }
