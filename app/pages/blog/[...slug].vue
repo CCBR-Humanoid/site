@@ -27,6 +27,22 @@ const isFocused = ref(false)
 const isButtonActive = ref(false)
 const isRevealed = computed(() => !isHidden.value || isButtonActive.value || isFocused.value)
 
+// Only show the animated return button on hover-capable, fine-pointer devices (desktop)
+const showReturnButton = ref(false)
+
+onMounted(() => {
+  const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+  const update = () => (showReturnButton.value = mq.matches)
+  update()
+  // Listen for capability changes (e.g., device plugged/unplugged)
+  if (typeof mq.addEventListener === 'function') {
+    mq.addEventListener('change', update)
+  } else if (typeof mq.addListener === 'function') {
+    // Safari fallback
+    mq.addListener(update)
+  }
+})
+
 onMounted(() => {
   // Hide after ~1s
   setTimeout(() => {
@@ -57,9 +73,9 @@ onMounted(() => {
     </UPageBody>
   </UPage>
   
-  <!-- Floating back-to-blog button -->
+  <!-- Floating back-to-blog button (desktop/hover only) -->
   <div
-    v-if="page"
+    v-if="page && showReturnButton"
     class="fixed bottom-6 left-0 z-50"
   >
     <div class="relative h-12 flex items-center">

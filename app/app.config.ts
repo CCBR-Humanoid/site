@@ -33,6 +33,7 @@ const createHeader = () => ({
   //search: true, // toggle visibility of search bar
   //colorMode: true, // toggle visibility of light/dark mode button
   links: [
+    { label: 'Home', to: '/' },
     { label: 'Our Team', to: '/team' },
     { label: 'Blog', to: '/blog' },
     { label: 'Hardware', to: '/hardware' },
