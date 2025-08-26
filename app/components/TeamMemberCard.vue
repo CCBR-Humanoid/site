@@ -23,14 +23,20 @@ const props = defineProps<{ member: TeamMember }>()
       <p class="text-sm text-gray-500">{{ props.member.role }}</p>
     </ULink>
 
-    <div v-if="props.member.socials?.length" class="mt-4 flex flex-wrap justify-center gap-3 mt-auto">
+    <div
+      v-if="props.member.socials?.length"
+      class="mt-4 flex flex-wrap justify-center gap-3 mt-auto"
+    >
       <ULink
         v-for="(social, i) in props.member.socials"
         :key="i"
         :to="social.url"
         target="_blank"
       >
-        <UIcon :name="social.icon" class="text-primary w-5 h-5" />
+        <UIcon
+          :name="social.icon"
+          class="text-primary w-5 h-5"
+        />
       </ULink>
     </div>
   </UCard>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-type Slide = { src: string; alt: string }
+type Slide = { src: string, alt: string }
 
 // Slides to show in the hero carousel. Uses public/ paths.
 const slides = ref<Slide[]>([
   { src: '/carousel/custom_actuator_box.jpg', alt: 'Box of custom actuators' },
   { src: '/carousel/custom_actuator_external.jpg', alt: 'Custom actuator (external)' },
-  { src: '/carousel/custom_actuator_internal.jpg', alt: 'Custom actuator (internal)' },
+  { src: '/carousel/custom_actuator_internal.jpg', alt: 'Custom actuator (internal)' }
 ])
 
 // Nothing else needed; UCarousel has a built-in autoplay plugin support.

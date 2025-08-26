@@ -4,7 +4,10 @@ const { footer } = useAppConfig()
 </script>
 
 <template>
-  <p v-if="footer?.credits" class="text-muted text-sm">
+  <p
+    v-if="footer?.credits"
+    class="text-muted text-sm"
+  >
     {{ footer.credits }}
   </p>
 </template>

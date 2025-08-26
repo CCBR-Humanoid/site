@@ -27,10 +27,12 @@ const display = computed(() => (team.value || []).slice(0, props.limit))
       class="hover:ring-primary transition"
       raw
     >
-      <UAvatar :src="m.avatar" :alt="m.name" />
+      <UAvatar
+        :src="m.avatar"
+        :alt="m.name"
+      />
     </ULink>
   </UAvatarGroup>
-  
 </template>
 
 <style scoped>
