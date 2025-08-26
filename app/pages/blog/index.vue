@@ -29,6 +29,18 @@ const sortKey = ref<'newest' | 'oldest' | 'title'>('newest')
 
 const filtered = computed(() => {
   let list = [...((posts.value || []) as Post[])]
+  // Helper to normalize a date-only string (YYYY-MM-DD) to local midnight to avoid UTC off-by-one
+  const toLocalDateString = (d?: string) => {
+    if (!d) return undefined
+    // If it's exactly a date-only string, treat it as local midnight
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return `${d}T00:00:00`
+    return d
+  }
+  const toTime = (d?: string) => {
+    const nd = toLocalDateString(d)
+    const t = nd ? new Date(nd).getTime() : NaN
+    return Number.isNaN(t) ? -Infinity : t
+  }
   if (selectedCategory.value) {
     list = list.filter(p => p.category === selectedCategory.value)
   }
@@ -40,13 +52,13 @@ const filtered = computed(() => {
   }
   switch (sortKey.value) {
     case 'oldest':
-      list.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')))
+      list.sort((a, b) => toTime(a.date) - toTime(b.date))
       break
     case 'title':
       list.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')))
       break
     default:
-      list.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+      list.sort((a, b) => toTime(b.date) - toTime(a.date))
   }
   return list
 })
@@ -54,7 +66,8 @@ const filtered = computed(() => {
 const items = computed(() => filtered.value.map((p: Post) => ({
   title: p.title,
   description: p.description,
-  date: p.date,
+  // Normalize date for display to avoid timezone shifting
+  date: p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date) ? `${p.date}T00:00:00` : p.date,
   image: p.cover,
   path: p.path,
   category: p.category,
@@ -218,6 +231,12 @@ const sortOptions = [
                   loading="lazy"
                   decoding="async"
                 >
+                <BlogCoverFallback
+                  v-else
+                  :title="post.title"
+                  :category="post.category"
+                  :date="post.date || undefined"
+                />
               </template>
               <template #footer>
                 <div class="flex flex-wrap items-center gap-2 px-4 pb-4">
