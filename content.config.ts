@@ -32,9 +32,9 @@ function createPartnersCollection() {
     source: 'team/partners.yaml',
     schema: z.object({
       partners: z.array(z.object({
-        name: z.string(),
+        title: z.string(),
+        subtitle: z.string().optional(),
         logo: z.string(),
-        clubs: z.array(z.string()).default([]),
         url: z.string()
       }))
     })
