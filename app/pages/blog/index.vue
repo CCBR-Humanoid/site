@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { pluralize } from '../../../utils/pluralize'
+
 type Post = {
   title: string
   description?: string
@@ -13,13 +14,13 @@ type Post = {
 const { data: posts } = await useAsyncData<Post[]>('blog-list', () =>
   queryCollection('blog')
     .where('draft', '=', false)
-  .select('title', 'description', 'path', 'date', 'category', 'cover', 'tags')
+    .select('title', 'description', 'path', 'date', 'category', 'cover', 'tags')
     .all()
 )
 
 // Derive filters
-const allTags = computed(() => Array.from(new Set((posts.value || []).flatMap(p => (p as any).tags || []))).sort())
-const allCategories = computed(() => Array.from(new Set((posts.value || []).map(p => (p as any).category).filter(Boolean))).sort())
+const allTags = computed(() => Array.from(new Set(((posts.value || []) as Post[]).flatMap(p => p.tags || []))).sort())
+const allCategories = computed(() => Array.from(new Set(((posts.value || []) as Post[]).map(p => p.category).filter(Boolean))).sort())
 
 // UI state
 const selectedCategory = ref<string | null>(null)
@@ -27,13 +28,13 @@ const selectedTags = ref<string[]>([])
 const sortKey = ref<'newest' | 'oldest' | 'title'>('newest')
 
 const filtered = computed(() => {
-  let list = [...(posts.value || [])]
+  let list = [...((posts.value || []) as Post[])]
   if (selectedCategory.value) {
-    list = list.filter(p => (p as any).category === selectedCategory.value)
+    list = list.filter(p => p.category === selectedCategory.value)
   }
   if (selectedTags.value.length) {
-    list = list.filter(p => {
-      const tags = ((p as any).tags || []) as string[]
+    list = list.filter((p) => {
+      const tags = (p.tags || []) as string[]
       return selectedTags.value.every(t => tags.includes(t))
     })
   }
@@ -50,7 +51,7 @@ const filtered = computed(() => {
   return list
 })
 
-const items = computed(() => filtered.value.map((p: any) => ({
+const items = computed(() => filtered.value.map((p: Post) => ({
   title: p.title,
   description: p.description,
   date: p.date,
@@ -91,13 +92,20 @@ const sortOptions = [
           <section class="py-8 sm:py-10">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">CCBR Blog</h1>
+                <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">
+                  CCBR Blog
+                </h1>
                 <p class="mt-2 text-sm text-muted-foreground max-w-prose">
                   Stories from our builds, experiments, and software. Filter by category or tags, and sort how you like.
                 </p>
               </div>
               <div class="hidden sm:flex items-center gap-3">
-                <UBadge color="primary" variant="soft">{{ postCount }} {{ pluralize(postCount, 'post') }}</UBadge>
+                <UBadge
+                  color="primary"
+                  variant="soft"
+                >
+                  {{ postCount }} {{ pluralize(postCount, 'post') }}
+                </UBadge>
               </div>
             </div>
           </section>
@@ -106,10 +114,12 @@ const sortOptions = [
           <section class="mb-6 grid gap-3 sm:flex sm:items-center sm:justify-between">
             <div class="flex flex-wrap items-center gap-2">
               <!-- Category filter -->
-              <UDropdownMenu :items="[[
-                { label: 'All categories', onSelect: () => selectedCategory = null },
-                ...allCategories.map(c => ({ label: c, onSelect: () => selectedCategory = c }))
-              ]]">
+              <UDropdownMenu
+                :items="[[
+                  { label: 'All categories', onSelect: () => selectedCategory = null },
+                  ...allCategories.filter(Boolean).map(c => ({ label: c as string, onSelect: () => selectedCategory = c as string }))
+                ]]"
+              >
                 <UButton
                   color="neutral"
                   variant="soft"
@@ -120,10 +130,12 @@ const sortOptions = [
               </UDropdownMenu>
 
               <!-- Tags filter -->
-              <UDropdownMenu :items="[allTags.map(tag => ({
-                label: tag,
-                onSelect: () => selectedTags = selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]
-              }))]">
+              <UDropdownMenu
+                :items="[allTags.map(tag => ({
+                  label: tag,
+                  onSelect: () => selectedTags = selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]
+                }))]"
+              >
                 <UButton
                   color="neutral"
                   variant="soft"
@@ -148,7 +160,10 @@ const sortOptions = [
           </section>
 
           <!-- Active tag chips -->
-          <div v-if="selectedCategory || selectedTags.length" class="mb-4 flex flex-wrap items-center gap-2">
+          <div
+            v-if="selectedCategory || selectedTags.length"
+            class="mb-4 flex flex-wrap items-center gap-2"
+          >
             <UBadge
               v-if="selectedCategory"
               color="primary"
@@ -169,15 +184,25 @@ const sortOptions = [
             >
               <span class="inline-flex items-center gap-1">
                 {{ tag }}
-                <UIcon name="i-lucide-x" class="h-3.5 w-3.5 opacity-60 group-hover:opacity-100" />
+                <UIcon
+                  name="i-lucide-x"
+                  class="h-3.5 w-3.5 opacity-60 group-hover:opacity-100"
+                />
               </span>
             </UBadge>
 
-            <UButton color="neutral" variant="ghost" size="xs" @click="selectedCategory = null; selectedTags = []">Clear</UButton>
+            <UButton
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              @click="selectedCategory = null; selectedTags = []"
+            >
+              Clear
+            </UButton>
           </div>
 
           <!-- Posts -->
-      <UBlogPosts class="mt-2">
+          <UBlogPosts class="mt-2">
             <UBlogPost
               v-for="(post, index) in items"
               :key="index"
@@ -192,12 +217,27 @@ const sortOptions = [
                   class="w-full aspect-[16/9] object-cover"
                   loading="lazy"
                   decoding="async"
-                />
+                >
               </template>
               <template #footer>
-        <div class="flex flex-wrap items-center gap-2 px-4 pb-4">
-                  <UBadge v-if="post.category" color="primary" variant="soft" class="rounded-full">{{ post.category }}</UBadge>
-                  <UBadge v-for="tag in post.tags" :key="tag" color="neutral" variant="soft" class="rounded-full">{{ tag }}</UBadge>
+                <div class="flex flex-wrap items-center gap-2 px-4 pb-4">
+                  <UBadge
+                    v-if="post.category"
+                    color="primary"
+                    variant="soft"
+                    class="rounded-full"
+                  >
+                    {{ post.category }}
+                  </UBadge>
+                  <UBadge
+                    v-for="tag in post.tags"
+                    :key="tag"
+                    color="neutral"
+                    variant="soft"
+                    class="rounded-full"
+                  >
+                    {{ tag }}
+                  </UBadge>
                 </div>
               </template>
             </UBlogPost>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 export function useSearchData() {
   // Build unified search files from both docs and blog
   const { data: files } = useLazyAsyncData('search', async () => {
@@ -7,8 +6,8 @@ export function useSearchData() {
       queryCollectionSearchSections('blog')
     ])
     return [
-      ...((docs as any[]) || []),
-      ...((blog as any[]) || [])
+      ...((docs as unknown[]) || []),
+      ...((blog as unknown[]) || [])
     ]
   }, { server: false })
 
@@ -18,12 +17,16 @@ export function useSearchData() {
   )
 
   // Helper to assign icons to navigation trees
-  function withIcon(nodes: any[] = [], icon: string): any[] {
-    return (nodes || []).map((n: any) => ({
-      ...n,
-      icon,
-      children: withIcon(n.children || [], icon)
-    }))
+  function withIcon(nodes: unknown[] = [], icon: string): unknown[] {
+    return (nodes || []).map((n: unknown) => {
+      const asObj = (n as Record<string, unknown>) || {}
+      const children = Array.isArray(asObj.children) ? (asObj.children as unknown[]) : []
+      return {
+        ...asObj,
+        icon,
+        children: withIcon(children, icon)
+      }
+    })
   }
 
   // Build combined navigation for search (docs + blog) with icons
@@ -32,10 +35,10 @@ export function useSearchData() {
       queryCollectionNavigation('docs'),
       queryCollectionNavigation('blog')
     ])
-    const docsRoot = { title: 'Docs', path: '/docs', children: [] as any[] }
-    const blogRoot = { title: 'Blog', path: '/blog', children: [] as any[] }
-    const docsNavWithIcons = withIcon((docsNav as any[]) || [], 'i-lucide:book-open')
-    const blogNavWithIcons = withIcon((blogNav as any[]) || [], 'i-lucide:newspaper')
+    const docsRoot = { title: 'Docs', path: '/docs', children: [] as unknown[] }
+    const blogRoot = { title: 'Blog', path: '/blog', children: [] as unknown[] }
+    const docsNavWithIcons = withIcon((docsNav as unknown[]) || [], 'i-lucide:book-open')
+    const blogNavWithIcons = withIcon((blogNav as unknown[]) || [], 'i-lucide:newspaper')
     return [
       { ...docsRoot, icon: 'i-lucide:book-open' },
       ...docsNavWithIcons,
