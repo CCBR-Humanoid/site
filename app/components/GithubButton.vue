@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const appConfig = useAppConfig()
+</script>
+
 <template>
   <UButton
     color="neutral"
@@ -10,7 +14,3 @@
     Repositories
   </UButton>
 </template>
-
-<script setup lang="ts">
-const appConfig = useAppConfig()
-</script>

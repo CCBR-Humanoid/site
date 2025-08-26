@@ -29,3 +29,11 @@ html, body, #__nuxt {
 button, a, .truncate {
   max-width: 100%;
 }
+
+/* Make the Columbia CURC white SVG appear black in light mode (keep white in dark) */
+html:not(.dark) img[src$="/logos/curc.svg"] {
+  /* Approximate #205095 (CURC blue) from a white SVG using CSS filters */
+  /* The first two filters make it black first */
+  /* Used https://codepen.io/sosuke/pen/Pjoqqp to generate the filter */
+  filter: brightness(0) saturate(100%) invert(23%) sepia(77%) saturate(1280%) hue-rotate(193deg) brightness(93%) contrast(89%);
+}
