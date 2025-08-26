@@ -7,9 +7,8 @@ description: Introducing our blog where we share updates, builds, and insights.
 date: 2025-08-23
 category: Announcement
 tags:
-  - intro
-  - overview
-author: Team CCBR
+  - meta
+author: CCBR Team
 draft: false
 ---
 

@@ -4,10 +4,9 @@ description: A walkthrough of our actuator design, from CAD to bench tests.
 date: 2025-08-20
 category: Hardware
 tags:
-  - mechanics
-  - cad
-  - testing
-author: Alex
+  - mechanical
+  - electrical
+author: CCBR Team
 cover: /carousel/custom_actuator_external.jpg
 draft: false
 ---

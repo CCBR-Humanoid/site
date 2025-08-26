@@ -5,9 +5,7 @@ date: 2025-08-10
 category: Update
 tags:
   - devlog
-  - roundup
-  - progress
-author: Team CCBR
+author: CCBR Team
 draft: false
 ---
 

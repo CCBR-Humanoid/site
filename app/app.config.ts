@@ -26,9 +26,9 @@ const createHeader = () => ({
   title: 'CCBR',
   to: '/',
   logo: {
-    alt: '',
-    light: '',
-    dark: ''
+    alt: 'CCBR Logo',
+    light: '/logos/ccbrlogo.webp',
+    dark: '/logos/ccbrlogo.webp'
   },
   //search: true, // toggle visibility of search bar
   //colorMode: true, // toggle visibility of light/dark mode button

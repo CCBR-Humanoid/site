@@ -5,10 +5,8 @@ date: 2025-08-18
 category: Software
 tags:
   - simulation
-  - controls
-  - tooling
-author: Priya
-cover: /images/ccbrlogo.webp
+author: CCBR Team
+cover: /logos/ccbrlogo.webp
 draft: false
 ---
 
