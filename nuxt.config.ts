@@ -1,12 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    //    '@nuxt/eslint',
+    // '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxt/content',
     'nuxt-og-image',
-    'nuxt-llms'
+    // 'nuxt-llms'
   ],
 
   devtools: {
@@ -40,12 +40,9 @@ export default defineNuxtConfig({
         '/'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false
+      autoSubfolderIndex: false,
     },
-    routeRules: {
-      '/hardware': { redirect: '/docs' },
-      '/software': { redirect: '/docs' }
-    }
+    routeRules: {}
   },
 
   // eslint: {
@@ -59,17 +56,17 @@ export default defineNuxtConfig({
 
   icon: {
     provider: 'iconify'
-  },
-
-  llms: {
-    domain: 'https://ccbr.ai/',
-    title: 'CCBR Docs',
-    description: 'Open-source robotics docs from the CCBR Humanoid Collaboratory.',
-    full: {
-      title: 'CCBR Docs - Full Documentation',
-      description: 'The full documentation for the CCBR Humanoid Collaboratory projects.'
-    },
-    sections: [
-    ]
   }
+
+  // llms: {
+  //   domain: 'https://ccbr.ai/',
+  //   title: 'CCBR Docs',
+  //   description: 'Open-source robotics docs from the CCBR Humanoid Collaboratory.',
+  //   full: {
+  //     title: 'CCBR Docs - Full Documentation',
+  //     description: 'The full documentation for the CCBR Humanoid Collaboratory projects.'
+  //   },
+  //   sections: [
+  //   ]
+  // }
 })
