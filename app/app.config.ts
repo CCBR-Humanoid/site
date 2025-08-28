@@ -26,9 +26,9 @@ const createHeader = () => ({
   title: 'CCBR',
   to: '/',
   logo: {
-    alt: '',
-    light: '',
-    dark: ''
+    alt: 'logo.svg',
+    light: 'logo.svg',
+    dark: 'logo.svg'
   },
   // search: true, // toggle visibility of search bar
   // colorMode: true, // toggle visibility of light/dark mode button
@@ -100,5 +100,5 @@ export default defineAppConfig({
   header: createHeader(),
   footer: createFooter(),
   social: createSocial(),
-  toc: createToc()
+  toc: createToc(),
 })
