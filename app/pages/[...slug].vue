@@ -79,7 +79,7 @@ const links = computed(() => {
     </UPageBody>
 
     <template
-      v-if="showToc && page?.body?.toc?.links?.length"
+      v-if="showToc"
       #right
     >
       <UContentToc

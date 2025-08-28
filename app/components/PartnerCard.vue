@@ -14,11 +14,11 @@ const props = defineProps<{ partner: Partner }>()
       class="text-center p-6 flex flex-col items-center h-full transform transition-all duration-500 ease-in-out
       hover:scale-105 hover:shadow-xl hover:-translate-y-1"
     >
-      <img
+      <NuxtImg
         :src="props.partner.logo"
         :alt="props.partner.title"
         class="mb-4 h-30 w-auto object-contain mx-auto"
-      >
+      />
 
       <p class="font-semibold">{{ props.partner.title }}</p>
       <p
