@@ -19,7 +19,8 @@ const props = defineProps<{ member: TeamMember }>()
       <UAvatar
         :src="props.member.avatar"
         :alt="props.member.name"
-        size=" "
+        width="840"
+        height="840"
         class="mx-auto mb-4 w-36 h-36 sm:w-40 sm:h-40"
       />
       <p class="font-semibold leading-tight text-center">{{ props.member.name }}</p>
