@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
+import { CONTACT_EMAIL } from '../constants'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
@@ -66,6 +67,15 @@ const currentMenuLabel = computed(() => {
           class="rounded-full"
         />
       </UDropdownMenu>
+
+      <!-- Primary, always-visible contact CTA -->
+      <UButton
+        :to="`mailto:${CONTACT_EMAIL}`"
+        color="primary"
+        size="sm"
+        class="ml-2 rounded-full"
+        label="Contact us"
+      />
 
       <!-- Desktop/tablet links -->
       <!--
