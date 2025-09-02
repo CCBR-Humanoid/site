@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useContentCollectionArray } from '../../composables/useContentCollectionArray'
-import type { Partner, TeamMember } from '~/types'
+import type { Partner, TeamMember } from '@schema'
 
 // Load team and partners from @nuxt/content data collections
 const team = await useContentCollectionArray<TeamMember>({

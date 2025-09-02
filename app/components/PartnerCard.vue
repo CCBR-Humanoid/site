@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Partner } from '~/types/partner'
+import type { Partner } from '@schema'
 
 const props = defineProps<{ partner: Partner }>()
 </script>

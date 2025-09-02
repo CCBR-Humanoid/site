@@ -1,0 +1,14 @@
+# Hero carousel configuration. Use paths under /public for images
+slides:
+  - src: /carousel/custom_actuator_box.jpg
+    alt: Box of custom actuators
+    description: "Three custom-built actuators, based on the MIT Mini Cheetah."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+  - src: /carousel/custom_actuator_external.jpg
+    alt: Custom actuator (external)
+    description: The outside of a custom-built actuator, based on the MIT Mini Cheetah (before stator winding).
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+  - src: /carousel/custom_actuator_internal.jpg
+    alt: Custom actuator (internal)
+    description: "The internals of a custom-built actuator, based on the MIT Mini Cheetah (before stator winding)."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."

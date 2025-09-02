@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -8,6 +10,10 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     // 'nuxt-llms'
   ],
+
+  alias: {
+    '@schema': fileURLToPath(new URL('./schema', import.meta.url))
+  },
 
   devtools: {
     enabled: true

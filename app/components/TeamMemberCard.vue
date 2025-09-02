@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { TeamMember } from '~/types/team-member'
-
+import type { TeamMember } from '@schema'
 const props = defineProps<{ member: TeamMember }>()
 </script>
 
