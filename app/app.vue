@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/nuxt';
 import { useSearchData } from '../composables/useSearchData'
 
 const { seo } = useAppConfig()
@@ -31,6 +32,7 @@ provide('navigation', navigation)
 </script>
 
 <template>
+  <Analytics />
   <UApp>
     <NuxtLoadingIndicator />
 
