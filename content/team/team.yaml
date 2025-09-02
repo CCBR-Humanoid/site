@@ -40,8 +40,14 @@ members:
     avatar: /avatars/Sarah Hong.jpg
     profileUrl: https://www.linkedin.com/in/sarah-soohyun-hong/
     socials:
+      - icon: i-mdi-web
+        url: https://hyuncat.com
       - icon: i-simple-icons-linkedin
         url: https://www.linkedin.com/in/sarah-soohyun-hong/
+      - icon: i-simple-icons-gmail
+        url: mailto:ssh2198@columbia.edu
+      - icon: i-simple-icons-github
+        url: https://www.github.com/hyuncat
   - name: Alex Tong
     role: Software Team, UC Berkeley
     avatar: /avatars/Alex Tong.jpeg
