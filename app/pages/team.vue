@@ -25,7 +25,7 @@ const partners = await useContentCollectionArray<Partner>({
       min-width="220px"
       :heading-level="1"
     >
-      <template #item="{ item }">
+      <template #item="{ item }: { item: TeamMember, index: number }">
         <TeamMemberCard :member="item" />
       </template>
     </GridSection>
@@ -37,7 +37,7 @@ const partners = await useContentCollectionArray<Partner>({
       min-width="220px"
       :heading-level="2"
     >
-      <template #item="{ item }">
+      <template #item="{ item }: { item: Partner, index: number }">
         <PartnerCard :partner="item" />
       </template>
     </GridSection>
