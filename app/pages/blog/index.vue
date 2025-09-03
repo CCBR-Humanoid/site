@@ -57,47 +57,7 @@ defineOgImageComponent('Docs', {
             @update:sort-key="(v) => sortKey = v"
           />
 
-          <!-- Active tag chips -->
-          <div
-            v-if="selectedCategory || selectedTags.length"
-            class="mb-4 flex flex-wrap items-center gap-2"
-          >
-            <UBadge
-              v-if="selectedCategory"
-              color="primary"
-              variant="soft"
-              class="rounded-full"
-            >
-              {{ selectedCategory }}
-            </UBadge>
-
-            <UBadge
-              v-for="tag in selectedTags"
-              :key="tag"
-              color="neutral"
-              variant="soft"
-              class="rounded-full cursor-pointer select-none transition group hover:ring-2 hover:ring-[--ui-border] hover:bg-primary/10 hover:text-primary"
-              :aria-label="`Remove tag ${tag}`"
-              @click="selectedTags = selectedTags.filter(t => t !== tag)"
-            >
-              <span class="inline-flex items-center gap-1">
-                {{ tag }}
-                <UIcon
-                  name="i-lucide-x"
-                  class="h-3.5 w-3.5 opacity-60 group-hover:opacity-100"
-                />
-              </span>
-            </UBadge>
-
-            <UButton
-              color="neutral"
-              variant="ghost"
-              size="xs"
-              @click="selectedCategory = null; selectedTags = []"
-            >
-              Clear
-            </UButton>
-          </div>
+          <!-- Active tag chips are rendered inside BlogControls -->
 
           <!-- Posts -->
           <UBlogPosts class="mt-2">
