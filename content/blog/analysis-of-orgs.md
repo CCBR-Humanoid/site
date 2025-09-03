@@ -9,6 +9,7 @@ tags:
     - retrospective
     - cs
 author: Sarah Hong
+cover: /blog-images/fallen-bot.jpg
 ---
 ## CCBR: A project that bloomed from ICRA
 After ICRA, Donny reached out to our group chat proposing a project idea over the summer: building a modular, open source humanoid robot.
