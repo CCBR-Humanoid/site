@@ -4,6 +4,7 @@ export { partnersCollection } from './partners'
 export { docsCollection } from './docs'
 export { blogCollection } from './blog'
 export { carouselCollection } from './carousel'
+export { galleryCollection } from './gallery'
 
 import {
   landingCollection,
@@ -11,7 +12,8 @@ import {
   partnersCollection,
   docsCollection,
   blogCollection,
-  carouselCollection
+  carouselCollection,
+  galleryCollection
 } from './'
 
 // Assemble the content configuration
@@ -21,7 +23,8 @@ const collections = {
   partners: partnersCollection,
   docs: docsCollection,
   blog: blogCollection,
-  carousel: carouselCollection
+  carousel: carouselCollection,
+  gallery: galleryCollection
 }
 
 export default collections

@@ -35,6 +35,7 @@ const createHeader = () => ({
   links: [
     { label: 'Home', to: '/' },
     { label: 'Our Team', to: '/team' },
+  { label: 'Gallery', to: '/gallery' },
     { label: 'Blog', to: '/blog' },
     { label: 'Docs', to: '/docs' }
   ],

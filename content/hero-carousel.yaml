@@ -19,13 +19,13 @@
 #   controls: false  # defaults to false
 slides:
   - type: video
-    src: /carousel/running_leg.mov
+    src: /carousel/running_leg.mp4
     duration: "D * 0.75" # 75% of video duration
     info_duration: 2.2
     description: "A quick integration test of a moving quadruped leg, using the Unitree GO-M8010-6 motors."
     credits: "Designed and built by CCBR."
   - type: video
-    src: /carousel/spinning_custom_actuator.mov
+    src: /carousel/spinning_custom_actuator.mp4
     duration: 5
     description: "A custom-built actuator in motion, based on the MIT Mini Cheetah."
     credits: "Designed by Nachum Twersky. Built by CCBR."

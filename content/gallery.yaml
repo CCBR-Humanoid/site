@@ -1,0 +1,72 @@
+# Gallery configuration. Use paths under /public for images/videos
+# Each item supports image or video types with metadata and categorization.
+# Required fields:
+#   - type: image | video
+#   - title: string
+#   - date: YYYY-MM-DD
+#   - src: string (path or URL)
+# Optional fields:
+#   - description: string
+#   - credits: string
+#   - category: string
+#   - tags: string[]
+#   - alt: string (for images)
+#   - poster, autoplay, loop, muted, controls (for videos)
+items:
+  - type: image
+    title: Custom Actuator (External)
+    date: 2025-08-10
+    src: /carousel/custom_actuator_external.jpg
+    alt: Custom actuator external view
+    description: "The outside of a custom-built actuator."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+    category: Hardware
+    tags: [custom-actuator]
+  - type: image
+    title: Custom Actuator (Internal)
+    date: 2025-08-10
+    src: /carousel/custom_actuator_internal.jpg
+    alt: Custom actuator internal view
+    description: "The internals of a custom-built actuator."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+    category: Hardware
+    tags: [custom-actuator]
+  - type: image
+    title: Box of Custom Actuators
+    date: 2025-08-10
+    src: /blog-images/actuators.jpg
+    alt: Box of custom actuators
+    description: "A box containing multiple custom-built actuators."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+    category: Hardware
+    tags: [custom-actuator]
+  - type: video
+    title: Spinning Custom Actuator
+    date: 2025-07-21
+    # Prefer providing multiple sources so browsers can pick a supported codec
+    sources:
+      - src: /carousel/spinning_custom_actuator.mp4
+        type: video/mp4
+    # Tip: Provide a poster image to ensure correct thumbnail without loading the video file.
+    # poster: /carousel/spinning_custom_actuator.jpg
+    description: "A custom-built actuator in motion, based on the MIT Mini Cheetah."
+    credits: "Designed by Nachum Twersky. Built by CCBR."
+    category: Hardware
+    tags: [custom-actuator]
+  - type: video
+    title: Leg Integration Test
+    date: 2025-08-22
+    sources:
+      - src: /carousel/running_leg.mp4
+        type: video/mp4
+    description: "A quick integration test of a moving quadruped leg, using the Unitree GO-M8010-6 motors."
+    credits: "Designed and built by CCBR."
+    category: Hardware
+    tags: [leg]
+  - type: image
+    title: Mini π Robot
+    date: 2025-07-26
+    src: /blog-images/fallen-bot.jpg
+    alt: Mini π Robot
+    description: "Robify Robotics comes to the Columbia makerspace to demo their Mini π Robot for the CCBR team branch based around NYC."
+    tags: [mini-pi-robot]

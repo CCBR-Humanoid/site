@@ -19,6 +19,8 @@
   --color-green-950: #052E16;
 }
 
+/* (Border colors are component-specific; no global override.) */
+
 /* Prevent horizontal scrolling on small screens and clip accidental overflow */
 html, body, #__nuxt {
   max-width: 100vw;

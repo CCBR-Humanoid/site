@@ -11,7 +11,8 @@ export const docsCollection = defineCollection({
       'team.md',
       'blog/**',
       'team/**',
-      'hero-carousel.yaml'
+  'hero-carousel.yaml',
+  'gallery.yaml'
     ]
   },
   schema: docsSchema
