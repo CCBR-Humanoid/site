@@ -1,14 +1,41 @@
-# Hero carousel configuration. Use paths under /public for images
+# Hero carousel configuration. Use paths under /public for images/videos
+# To add an image slide, use:
+# - type: image
+#   src: /carousel/your-image.jpg  # or a full URL
+#   alt: Your image alt text
+#   description: Your image description
+#   credits: Your image credits
+# To add a video slide, use:
+# - type: video
+#   src: /carousel/your-video.mp4  # or a full URL
+#   poster: /carousel/your-poster.jpg # defaults to the first frame
+#   autoplay: true   # defaults to true
+#   loop: true       # defaults to true
+#   muted: true      # defaults to true (recommended for autoplay)
+#   controls: false  # defaults to false
+#   description: Your video description
+#   credits: Your video credits
 slides:
-  - src: /carousel/custom_actuator_box.jpg
+  - type: video
+    src: /carousel/running_leg.mov
+    description: "A quick integration test of a moving quadruped leg, using the Unitree GO-M8010-6 motors."
+    credits: "Designed and built by CCBR."
+  - type: video
+    src: /carousel/spinning_custom_actuator.mov
+    description: "A custom-build actuator in motion, based on the MIT Mini Cheetah."
+    credits: "Designed by Nachum Twersky. Built by CCBR."
+  - type: image
+    src: /carousel/custom_actuator_box.jpg
     alt: Box of custom actuators
     description: "Three custom-built actuators, based on the MIT Mini Cheetah."
     credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
-  - src: /carousel/custom_actuator_external.jpg
+  - type: image
+    src: /carousel/custom_actuator_external.jpg
     alt: Custom actuator (external)
     description: The outside of a custom-built actuator, based on the MIT Mini Cheetah (before stator winding).
     credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
-  - src: /carousel/custom_actuator_internal.jpg
+  - type: image
+    src: /carousel/custom_actuator_internal.jpg
     alt: Custom actuator (internal)
     description: "The internals of a custom-built actuator, based on the MIT Mini Cheetah (before stator winding)."
     credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
