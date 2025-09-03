@@ -1,80 +1,8 @@
 <script setup lang="ts">
 import { pluralize } from '../../../utils/pluralize'
+import { useBlogList } from '../../../composables/useBlogList'
 
-type Post = {
-  title: string
-  description?: string
-  path: string
-  date?: string
-  cover?: string
-  category?: string
-  tags?: string[]
-}
-
-const { data: posts } = await useAsyncData<Post[]>('blog-list', () =>
-  queryCollection('blog')
-    .where('draft', '=', false)
-    .select('title', 'description', 'path', 'date', 'category', 'cover', 'tags')
-    .all()
-)
-
-// Derive filters
-const allTags = computed(() => Array.from(new Set(((posts.value || []) as Post[]).flatMap(p => p.tags || []))).sort())
-const allCategories = computed(() => Array.from(new Set(((posts.value || []) as Post[]).map(p => p.category).filter(Boolean))).sort())
-
-// UI state
-const selectedCategory = ref<string | null>(null)
-const selectedTags = ref<string[]>([])
-const sortKey = ref<'newest' | 'oldest' | 'title'>('newest')
-
-const filtered = computed(() => {
-  let list = [...((posts.value || []) as Post[])]
-  // Helper to normalize a date-only string (YYYY-MM-DD) to local midnight to avoid UTC off-by-one
-  const toLocalDateString = (d?: string) => {
-    if (!d) return undefined
-    // If it's exactly a date-only string, treat it as local midnight
-    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return `${d}T00:00:00`
-    return d
-  }
-  const toTime = (d?: string) => {
-    const nd = toLocalDateString(d)
-    const t = nd ? new Date(nd).getTime() : NaN
-    return Number.isNaN(t) ? -Infinity : t
-  }
-  if (selectedCategory.value) {
-    list = list.filter(p => p.category === selectedCategory.value)
-  }
-  if (selectedTags.value.length) {
-    list = list.filter((p) => {
-      const tags = (p.tags || []) as string[]
-      return selectedTags.value.every(t => tags.includes(t))
-    })
-  }
-  switch (sortKey.value) {
-    case 'oldest':
-      list.sort((a, b) => toTime(a.date) - toTime(b.date))
-      break
-    case 'title':
-      list.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')))
-      break
-    default:
-      list.sort((a, b) => toTime(b.date) - toTime(a.date))
-  }
-  return list
-})
-
-const items = computed(() => filtered.value.map((p: Post) => ({
-  title: p.title,
-  description: p.description,
-  // Normalize date for display to avoid timezone shifting
-  date: p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date) ? `${p.date}T00:00:00` : p.date,
-  image: p.cover,
-  path: p.path,
-  category: p.category,
-  tags: p.tags || []
-})))
-
-const postCount = computed(() => posts.value?.length || 0)
+const { items, allTags, allCategories, selectedCategory, selectedTags, sortKey, postCount } = await useBlogList()
 
 useSeoMeta({
   title: 'Blog',
@@ -86,11 +14,6 @@ defineOgImageComponent('Docs', {
   description: 'Latest news and updates from the CCBR Humanoid Collaboratory.'
 })
 
-const sortOptions = [
-  { label: 'Newest', value: 'newest' },
-  { label: 'Oldest', value: 'oldest' },
-  { label: 'Title (A–Z)', value: 'title' }
-]
 </script>
 
 <template>
@@ -123,54 +46,16 @@ const sortOptions = [
             </div>
           </section>
 
-          <!-- Controls -->
-          <section class="mb-6 grid gap-3 sm:flex sm:items-center sm:justify-between">
-            <div class="flex flex-wrap items-center gap-2">
-              <!-- Category filter -->
-              <UDropdownMenu
-                :items="[[
-                  { label: 'All categories', onSelect: () => selectedCategory = null },
-                  ...allCategories.filter(Boolean).map(c => ({ label: c as string, onSelect: () => selectedCategory = c as string }))
-                ]]"
-              >
-                <UButton
-                  color="neutral"
-                  variant="soft"
-                  icon="i-lucide-filter"
-                  :label="selectedCategory ? `Category: ${selectedCategory}` : 'All categories'"
-                  class="rounded-full"
-                />
-              </UDropdownMenu>
-
-              <!-- Tags filter -->
-              <UDropdownMenu
-                :items="[allTags.map(tag => ({
-                  label: tag,
-                  onSelect: () => selectedTags = selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]
-                }))]"
-              >
-                <UButton
-                  color="neutral"
-                  variant="soft"
-                  icon="i-lucide-tags"
-                  :label="selectedTags.length ? `${selectedTags.length} ${pluralize(selectedTags.length, 'tag')}` : 'Tags'"
-                  class="rounded-full"
-                />
-              </UDropdownMenu>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <UDropdownMenu :items="[[{ label: 'Newest', onSelect: () => sortKey = 'newest' }, { label: 'Oldest', onSelect: () => sortKey = 'oldest' }, { label: 'Title (A–Z)', onSelect: () => sortKey = 'title' }]]">
-                <UButton
-                  color="neutral"
-                  variant="soft"
-                  icon="i-lucide-arrow-up-down"
-                  :label="sortOptions.find(o => o.value === sortKey)?.label || 'Sort'"
-                  class="rounded-full"
-                />
-              </UDropdownMenu>
-            </div>
-          </section>
+          <BlogControls
+            :all-tags="allTags"
+            :all-categories="allCategories"
+            :selected-category="selectedCategory"
+            :selected-tags="selectedTags"
+            :sort-key="sortKey"
+            @update:selected-category="(v) => selectedCategory = v"
+            @update:selected-tags="(v) => selectedTags = v"
+            @update:sort-key="(v) => sortKey = v"
+          />
 
           <!-- Active tag chips -->
           <div
@@ -216,50 +101,11 @@ const sortOptions = [
 
           <!-- Posts -->
           <UBlogPosts class="mt-2">
-            <UBlogPost
+            <BlogPostCard
               v-for="(post, index) in items"
               :key="index"
               v-bind="post"
-              :to="post.path"
-            >
-              <template #header>
-                <img
-                  v-if="post.image"
-                  :src="post.image"
-                  :alt="post.title"
-                  class="w-full aspect-[16/9] object-cover"
-                  loading="lazy"
-                  decoding="async"
-                >
-                <BlogCoverFallback
-                  v-else
-                  :title="post.title"
-                  :category="post.category"
-                  :date="post.date || undefined"
-                />
-              </template>
-              <template #footer>
-                <div class="flex flex-wrap items-center gap-2 px-4 pb-4">
-                  <UBadge
-                    v-if="post.category"
-                    color="primary"
-                    variant="soft"
-                    class="rounded-full"
-                  >
-                    {{ post.category }}
-                  </UBadge>
-                  <UBadge
-                    v-for="tag in post.tags"
-                    :key="tag"
-                    color="neutral"
-                    variant="soft"
-                    class="rounded-full"
-                  >
-                    {{ tag }}
-                  </UBadge>
-                </div>
-              </template>
-            </UBlogPost>
+            />
           </UBlogPosts>
         </UContainer>
       </div>

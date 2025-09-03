@@ -8,8 +8,8 @@ date: 2025-08-19
 category: Announcement
 tags:
   - meta
-author: CCBR Team
-draft: false
+author: Ryan Rudes
+cover: /blog-images/quadrupeds-in-isaaclab.jpeg
 ---
 
 ## Hello 👋

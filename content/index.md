@@ -16,7 +16,7 @@ orientation: horizontal
 CCBR Humanoid Collaboratory
 
 #description
-The first student-run, fully open-souce legged robotics collaboration.
+The first student-run, fully open-source legged robotics collaboration.
 <br></br>
 Founded at ICRA 2025 by <a href="/team">students</a> at Caltech, Columbia, Berkeley, and Rutgers.
 

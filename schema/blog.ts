@@ -8,7 +8,7 @@ export const blogPostSchema = z.object({
   cover: z.string().describe('Cover image path or URL').optional(),
   category: z.string().describe('Post category').optional(),
   tags: z.array(z.string()).default([]).optional(),
-  author: z.string().optional(),
+  author: z.union([z.string(), z.array(z.string())]).optional(),
   draft: z.boolean().default(false).optional(),
   seo: z.object({
     title: z.string().optional(),

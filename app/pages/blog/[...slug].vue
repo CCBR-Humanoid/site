@@ -26,6 +26,8 @@ defineOgImageComponent('Docs', {
   description
 })
 
+// Authors/date are rendered via PostMetaRow component
+
 // Back button reveal/hide state
 const isHidden = ref(false)
 const isFocused = ref(false)
@@ -66,6 +68,8 @@ onMounted(() => {
               :description="page.description"
             />
 
+            <PostMetaRow class="-mt-2" :date="page.date" :author="page.author" />
+
             <img
               v-if="page.cover"
               :src="page.cover"
@@ -77,6 +81,8 @@ onMounted(() => {
               <ContentRenderer :value="page" />
             </article>
           </div>
+                
+
         </UContainer>
       </UPageBody>
     </UPage>

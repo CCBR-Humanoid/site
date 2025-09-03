@@ -18,7 +18,8 @@ At the top of each file, include YAML front‑matter. Required and optional fiel
 - date: YYYY-MM-DD (optional, used for sorting)
 - cover: string (optional; image URL or path under `/public`)
 - tags: string[] (optional)
-- author: string (optional)
+- author: string | string[] (optional)
+  - You can specify multiple authors either as a YAML array or as a single comma-separated string: `"Alice, Bob"` or `['Alice', 'Bob']`.
 - draft: boolean (optional; when true, hides from the blog list)
 - seo: { title?: string, description?: string } (optional overrides)
 
@@ -33,6 +34,11 @@ cover: /logos/ccbrlogo.webp
 # tags:
 #   - announcement
 # author: Team CCBR
+# Or multiple authors:
+# author: "Alice Doe, Bob Smith"
+# author:
+#   - Alice Doe
+#   - Bob Smith
 # draft: false
 # seo:
 #   title: Custom SEO Title

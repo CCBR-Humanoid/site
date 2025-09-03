@@ -49,16 +49,11 @@ const displayDate = computed(() => {
       <div class="absolute -inset-6 rounded-2xl blur-2xl ring-1" :class="palette.ring" />
     </div>
 
-    <!-- Top row: category + date -->
-    <div class="absolute top-2 left-2 right-2 flex items-center justify-between gap-2">
+    <!-- Top-left: category -->
+    <div class="absolute top-2 left-2 flex items-center gap-2">
       <div v-if="category" class="inline-flex items-center gap-1.5 rounded-full bg-black/10 dark:bg-white/10 px-2 py-1 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur">
         <UIcon name="i-lucide-tag" class="h-3.5 w-3.5 opacity-80" />
         <span class="truncate">{{ category }}</span>
-      </div>
-      <div class="grow" />
-      <div v-if="displayDate" class="inline-flex items-center gap-1.5 rounded-full bg-black/10 dark:bg-white/10 px-2 py-1 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur">
-        <UIcon name="i-lucide-calendar" class="h-3.5 w-3.5 opacity-80" />
-        <span>{{ displayDate }}</span>
       </div>
     </div>
 
@@ -71,13 +66,10 @@ const displayDate = computed(() => {
       </div>
     </div>
 
-    <!-- Bottom title ribbon -->
-    <div class="absolute inset-x-0 bottom-0 p-2">
-      <div class="rounded-md bg-gradient-to-t from-black/50 to-transparent p-2">
-        <div class="line-clamp-1 text-sm font-medium text-white/95">
-          {{ title }}
-        </div>
-      </div>
+    <!-- Bottom-right: date -->
+    <div v-if="displayDate" class="absolute bottom-2 right-2 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/10 dark:bg-white/10 px-2 py-1 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur">
+      <UIcon name="i-lucide-calendar" class="h-3.5 w-3.5 opacity-80" />
+      <span>{{ displayDate }}</span>
     </div>
   </div>
 </template>
