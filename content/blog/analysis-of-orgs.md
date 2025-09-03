@@ -22,7 +22,7 @@ Five of us from different schools
 - Alex - Berkeley
 - Will - Rutgers
 
-came together under the (supposed-to-be) temporary name [CCBR](https://ccbr-humanoid.github.io/wiki/), and started building a robot, with the goal of making it walk by the end of summer.
+came together under the (supposed-to-be) temporary name CCBR, and started building a robot, with the goal of making it walk by the end of summer.
 
 ### In comparison to CURC?
 I'm still leading the Columbia Robotics Club (CURC). So, I wanted to reflect on what I've learned about the anatomy of organizations (both internally and externally) in general, and also compare the differences between the two organizations—with the hope that the path forward combines aspects from both.
