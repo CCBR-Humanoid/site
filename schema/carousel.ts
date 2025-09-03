@@ -6,7 +6,11 @@ const baseSlide = z.object({
   src: z.string(),
   alt: z.string().optional(),
   description: z.string().optional(),
-  credits: z.string().optional()
+  credits: z.string().optional(),
+  // Duration in seconds to show this slide before auto-advancing (number or math expression string)
+  duration: z.union([z.number().positive(), z.string().min(1)]).optional(),
+  // Duration in seconds to show the info overlay on mobile (number or math expression string)
+  info_duration: z.union([z.number().positive(), z.string().min(1)]).optional()
 })
 
 // Image slide.
