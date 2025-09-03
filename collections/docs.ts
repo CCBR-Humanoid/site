@@ -5,7 +5,14 @@ export const docsCollection = defineCollection({
   type: 'page',
   source: {
     include: '**',
-    exclude: ['index.md', 'team.md', 'blog/**', 'team/**', 'hardware.md', 'software.md']
+    // Exclude non-docs and data files so they don't appear in the docs nav
+    exclude: [
+      'index.md',
+      'team.md',
+      'blog/**',
+      'team/**',
+      'hero-carousel.yaml'
+    ]
   },
   schema: docsSchema
 })
