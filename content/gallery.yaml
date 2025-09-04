@@ -70,3 +70,13 @@ items:
     alt: Mini π Robot
     description: "Robify Robotics comes to the Columbia makerspace to demo their Mini π Robot for the CCBR team branch based around NYC."
     tags: [mini-pi-robot]
+  - type: image
+    title: "Completed Custom Actuator"
+    date: 2025-08-24
+    src: "/uploads/completed-custom-actuator-2025-09-04.jpg"
+    alt: "A 3D printed robotic actuator with a hand-winded stator."
+    description: "The full custom actuator assembled after hand-wiring the stato."
+    credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
+    category: "Hardware"
+    tags: [custom-actuator]
+
