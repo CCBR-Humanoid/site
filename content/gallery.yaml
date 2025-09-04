@@ -75,7 +75,7 @@ items:
     date: 2025-08-24
     src: "/uploads/completed-custom-actuator-2025-09-04.jpg"
     alt: "A 3D printed robotic actuator with a hand-winded stator."
-    description: "The full custom actuator assembled after hand-wiring the stato."
+    description: "The full custom actuator assembled after hand-wiring the stator."
     credits: "Designed by Nachum Twersky. Built by CCBR. Photo: Ryan Rudes."
     category: "Hardware"
     tags: [custom-actuator]
