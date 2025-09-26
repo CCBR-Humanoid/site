@@ -80,3 +80,13 @@ items:
     category: "Hardware"
     tags: [custom-actuator]
 
+  - type: image
+    title: "Leg Test Stand"
+    date: 2025-09-23
+    src: "/uploads/leg-test-stand-2025-09-26.jpeg"
+    alt: "A test stand, supporting a 3-DOF quadruped leg-hip assembly."
+    description: "A test stand supporting our first complete leg and hip prototype."
+    credits: "Designed by Luis Serrano Laguna. Photo by Ryan Rudes."
+    category: "Hardware"
+    tags: [leg]
+
